@@ -72,7 +72,8 @@ class PageSeeder extends Seeder
                 <h3><strong>Liên hệ với chúng tôi</strong></h3>
                 <div class="row">
                 <div class="col-md-6 col-12 px-4">
-                    <form>
+                    <form method="post" action="http://localhost:8000/send-contact" >
+                        @csrf
                         <div class="mb-3">
                             <label  class="form-label">Họ tên</label>
                             <input type="text" class="form-control" >
@@ -81,10 +82,7 @@ class PageSeeder extends Seeder
                             <label  class="form-label">Email address</label>
                             <input type="email" class="form-control" >
                         </div>
-                        <div class="mb-3">
-                        <label  class="form-label">Tiêu đề</label>
-                        <input type="text" class="form-control" >
-                    </div>
+                        
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Nội dung</label>
                             <textarea style="height:100px" class="form-control"></textarea>

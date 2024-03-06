@@ -3,6 +3,11 @@
         <div class="row py-5 my-5">
             <div class="col-md-8 col-12">
                 <livewire:partials.breadcrumb :current="$name" :created="$created" />
+                @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+                @endif
                 <h1><strong>{{$name}}</strong></h1>
                 <img src="{{asset('storage/pages/'.$img)}}" class="pt-4 pb-4 w-100">
                 {!!$content!!}

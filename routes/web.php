@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\Contact;
+use Illuminate\Support\Facades\Validator;
 
 use App\Livewire\Admin\Dashboard\Setting;
 use App\Livewire\Admin\Dashboard\Role;
@@ -51,6 +54,20 @@ Route::get('/b/tim-kiem', SearchResult::class)->name('search');
 Route::get('/{slug}', Page::class)->name('page');
 Route::get('/p/{slug}', Post::class)->name('post');
 
+Route::post('/send-contact', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        redirect()->back()->with('message', 'Có lỗi trong dữ liệu gửi đi');
+    }
+
+    Contact::create($request);
+    redirect()->back()->with('message', 'Thực hiện thành công!');
+})->name('sendcontact');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard/home', Index::class)->name('dashboard.home');
