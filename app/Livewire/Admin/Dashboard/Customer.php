@@ -11,6 +11,7 @@ class Customer extends Component
 {
     use WithPagination;
     public $breadcrumb;
+    public $chooseList;
     public function mount()
     {
         $this->breadcrumb = [

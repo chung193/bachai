@@ -41,7 +41,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="border-0">
-                                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                                <input class="form-check-input mt-0" type="checkbox" value="" wire:model="chooseList" aria-label="Checkbox for following text input">
                             </th>
                             <th class="border-0">#</th>
                             <th class="border-0">Name</th>
