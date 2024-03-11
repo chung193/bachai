@@ -17,6 +17,7 @@ use App\Livewire\Admin\Dashboard\Index;
 use App\Livewire\Admin\Dashboard\Post as PostManager;
 use App\Livewire\Admin\Dashboard\PostAdd;
 use App\Livewire\Admin\Dashboard\PostEdit;
+use App\Livewire\Admin\Dashboard\Customer;
 
 use App\Livewire\Admin\Dashboard\Users;
 use App\Livewire\Admin\Dashboard\UserAdd;
@@ -54,6 +55,10 @@ Route::get('/lien-he', Contact::class)->name('contact');
 Route::get('/{slug}', Page::class)->name('page');
 Route::get('/p/{slug}', Post::class)->name('post');
 
+Route::get('/admin/auth/login', Login::class)->name('admin.auth.login');
+Route::get('/admin/auth/forgot', Forgot::class)->name('admin.auth.forgot');
+Route::get('/admin/auth/logout', Logout::class)->name('admin.auth.logout');
+
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard/home', Index::class)->name('dashboard.home');
     Route::get('/admin/dashboard/post', PostManager::class)->name('dashboard.post');
@@ -76,4 +81,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/dashboard/profile/', Profile::class)->name('dashboard.profile');
     Route::get('/admin/dashboard/contact/', ContactController::class)->name('dashboard.contact');
+    Route::get('/admin/dashboard/customer/', Customer::class)->name('dashboard.customer');
 });

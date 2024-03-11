@@ -42,7 +42,7 @@ class Login extends Component
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(['email' => $this->email])->first();
             auth()->login($user, $this->remember_me);
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended('/admin/dashboard/home');
         } else {
             return $this->addError('email', trans('auth.failed'));
         }
