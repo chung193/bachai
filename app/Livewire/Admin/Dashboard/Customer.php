@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Dashboard;
 use Livewire\Component;
 use App\Models\Customer as customerModel;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
 
 class Customer extends Component
 {
@@ -15,6 +16,15 @@ class Customer extends Component
         $this->breadcrumb = [
             "Customers" => url("admin/dashboard/customer"),
         ];
+    }
+
+    #[On('reload')]
+    public function update($isSuccess)
+    {
+        if ($isSuccess) {
+            $this->mount();
+            session()->flash('message', 'Customers Import Successfully');
+        }
     }
     public function render()
     {

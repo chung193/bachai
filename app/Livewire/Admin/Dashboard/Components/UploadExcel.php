@@ -15,16 +15,21 @@ class UploadExcel extends Component
     use WithFileUploads;
     #[Validate('max:102400')] // 1MB Max
     public $file;
+    public function loadToDb($filename)
+    {
+        Excel::import(new CustomerImport, $this->file);
+    }
     public function import()
     {
-        if ($this->file != null) {
-            // $res = Storage::disk('public_uploads')->put('files', $this->file);
-            // dd($res);
-            // $arr = explode("/", $res);
-            // $filename = $arr[sizeof($arr) - 1];
-            // dd($filename);
-            // $this->dispatch('upload', info: $filename);
-            Excel::import(new CustomerImport, $this->file);
+        if ($this->file) {
+            $fileName = $this->file->getClientOriginalName();
+
+            $arr = explode(".", $fileName);
+            $res =  Storage::disk('public_uploads')->put('files', $this->file);
+            $arr = explode("/", $res);
+            $filename = $arr[sizeof($arr) - 1];
+            $this->loadToDb(public_path() . '/files/' . $filename);
+            $this->dispatch('reload', isSuccess: "Update success");
         }
     }
     public function render()
