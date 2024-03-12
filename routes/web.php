@@ -18,6 +18,7 @@ use App\Livewire\Admin\Dashboard\Post as PostManager;
 use App\Livewire\Admin\Dashboard\PostAdd;
 use App\Livewire\Admin\Dashboard\PostEdit;
 use App\Livewire\Admin\Dashboard\Customer;
+use App\Livewire\Admin\Dashboard\Booking;
 
 use App\Livewire\Admin\Dashboard\Users;
 use App\Livewire\Admin\Dashboard\UserAdd;
@@ -82,4 +83,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard/profile/', Profile::class)->name('dashboard.profile');
     Route::get('/admin/dashboard/contact/', ContactController::class)->name('dashboard.contact');
     Route::get('/admin/dashboard/customer/', Customer::class)->name('dashboard.customer');
+    Route::get('/admin/dashboard/booking/', Booking::class)->name('dashboard.booking');
 });

@@ -4,6 +4,8 @@ namespace App\Livewire\Admin\Dashboard\Components;
 
 use Livewire\Component;
 use App\Imports\CustomerImport;
+use App\Imports\BookingImport;
+
 use Maatwebsite\Excel\Facades\Excel;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
@@ -18,6 +20,8 @@ class UploadExcel extends Component
     public function loadToDb($filename)
     {
         Excel::import(new CustomerImport, $this->file);
+        Excel::import(new BookingImport, $this->file);
+        $this->dispatch('reload', isSuccess: "Update success");
     }
     public function import()
     {
@@ -29,7 +33,6 @@ class UploadExcel extends Component
             $arr = explode("/", $res);
             $filename = $arr[sizeof($arr) - 1];
             $this->loadToDb(public_path() . '/files/' . $filename);
-            $this->dispatch('reload', isSuccess: "Update success");
         }
     }
     public function render()
